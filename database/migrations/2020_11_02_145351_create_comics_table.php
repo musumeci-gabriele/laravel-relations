@@ -13,7 +13,7 @@ class CreateComicsTable extends Migration
      */
     public function up()
     {
-        // Prepariamo tutti i dati per il nostro db ---------------------
+        //* Prepariamo tutti i dati per il nostro db
         
         Schema::create('comics', function (Blueprint $table) {
             $table->id();

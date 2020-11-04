@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+// *importiamo il model Genere
 use App\Genre;
+// *importiamo il faker
 use Faker\Generator as Faker;
 
 class GenresTableSeeder extends Seeder
@@ -13,7 +15,7 @@ class GenresTableSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        // //Array dei generi del db
+        //* Array dei generi del db
         // $genreArray = [
         //     "fantasy",
         //     "horror",
@@ -23,10 +25,10 @@ class GenresTableSeeder extends Seeder
         //     "sci-fi"
         // ];
 
-      
-        
+
+
         // $array = [];
-        // // abbiamo generato 10 parole diverse e inserite in db 
+        //* abbiamo generato 10 parole diverse e inserite in db 
         // while (count($array) < 10){
         //     $fakerWord = $faker->word;
 
@@ -36,7 +38,7 @@ class GenresTableSeeder extends Seeder
         //     }
         // }
 
-        // // creami i nomi dal mio model e poi salva in db
+        //* crea i nomi dal mio model e poi salva in db
         // foreach ($array as $genre) {
         //     $newgenre = new Genre;
         //     $newgenre->name = $genre;
@@ -45,20 +47,20 @@ class GenresTableSeeder extends Seeder
 
         $counter = 0;
 
-        while ($counter < 10) { 
+        while ($counter < 10) {
 
             $word = $faker->word;
-            
+
             $data = Genre::where("nome", $word)->get();
 
-            if($data->count() == 0){
+            // * controlliamo che la parola non sia gia presente
+            if ($data->count() == 0) {
                 $newgenre = new Genre;
                 $newgenre->name = $word;
 
                 $newgenre->save();
                 $counter++;
             }
-            
         }
-     }
+    }
 }
