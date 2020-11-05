@@ -9,6 +9,7 @@ class Author extends Model
     //* creo la relazione ono to one con i Model AuthorInfo
     public function info()
     {
+        // *relazione
         return $this->hasOne("App\AuthorInfo");
     }
 

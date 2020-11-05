@@ -14,7 +14,7 @@
         </header>
 
          <main>
-            @yield('main-content')
+            @yield('page-content')
         </main>
 
         <footer>

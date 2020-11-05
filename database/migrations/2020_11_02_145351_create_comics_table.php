@@ -19,7 +19,9 @@ class CreateComicsTable extends Migration
             $table->id();
             $table->string("title",30);
             $table->string("original_title",50)->nullable();
-            $table->string("author",50);
+            $table->string("author_id")->nullable();
+            // *relazione con la colonna author_id
+            $table->foreign("author_id")->references("id")->on("authors")->onDelete("cascade");
             $table->smallinteger("number");
             $table->smallinteger("n_pages");
             $table->string("edition",50);

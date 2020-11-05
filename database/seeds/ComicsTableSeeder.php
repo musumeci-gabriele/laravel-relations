@@ -19,6 +19,9 @@ class ComicsTableSeeder extends Seeder
         //* Prepariamo con il ciclo for i campi da compilare del nostro db
 
         for ($i = 0; $i < 10; $i++) {
+        
+            // $author = Author::inRandomOrder()->first();
+
             $newComic = new Comic();
             $newComic->title = $faker->text(30);
             if (rand(0, 1) == 1) {

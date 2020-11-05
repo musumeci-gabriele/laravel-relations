@@ -19,7 +19,7 @@ class AuthorsInfoTableSeeder extends Seeder
         $authors = AuthorInfo::all();
 
         //* faccio un ciclo  per ogni singolo autore che vogliamo salvare
-        foreach($authors as $author){
+        foreach ($authors as $author) {
 
             $newAuthorInfo = new AuthorInfo;
 
@@ -31,11 +31,11 @@ class AuthorsInfoTableSeeder extends Seeder
             $newAuthorInfo->bio = $faker->paragraph(5, true);
 
             //* se non passiamo valori lui andra a prendere valori di dafault
-            if(rand(0,1) == 1){
-                $newAuthorInfo->image = $faker->imageUrl(200,300);
+            if (rand(0, 1) == 1) {
+                $newAuthorInfo->image = $faker->imageUrl(200, 300);
                 $newAuthorInfo->alive = 1;
             }
-            
+        $newAuthorInfo->save();
         }
     }
 }

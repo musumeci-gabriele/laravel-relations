@@ -1,33 +1,20 @@
-!DOCTYPE html>
-<html lang="en">
+@extends('layouts.main')
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Comics</title>
-        <link rel="stylesheet" href="{{ asset('css/app.css') }} ">
-    </head>
-
-    <body>
-        <div class="container">
-            @foreach ($data as $comic)
-                <ul class="scheda">
-                    <li class="scheda_item">
-                        <h3>{{ $comic->title }}</h3>
-                    </li>
-                    <li class="scheda_item">Titolo originale: {{ $comic->original_title }}</li>
-                    <li class="scheda_item">Editore: {{ $comic->publisher }}</li>
-                    <li class="scheda_item">Anno: {{ $comic->year }}</li>
-                    <li class="scheda_item">Numero: {{ $comic->number }}</li>
-                    <li class="scheda_item">Pagine: {{ $comic->pages }}</li>
-                    <li class="scheda_item">Prezzo: €{{ $comic->price }}</li>
-                    <li class="scheda_item">
-                        <a href="{{ route('comics.show', $comic->id) }} "> <img src="{{ $comic->img_cover }}" alt=""> </a>
-                    </li>
-                </ul>
+@section('page-content')
+    <div class="container">
+        <h1>Lista fumetti</h1>
+        <div class="row">
+            @foreach ($comics as $comic)
+                <div class="col-sm-4">
+                    <div class="card">
+                        <img class="card-img-top" style="width: 100%" src="{{ $comic->cover }}" alt="{{ $comic->title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $comic->title }}</h5>
+                            <a href="{{ route('comics.show', $comic->id) }}" class="btn btn-primary">Scopri di più</a>
+                        </div>
+                    </div>
+                </div>
             @endforeach
         </div>
-    </body>
-
-</html
+    </div>
+@endsection
