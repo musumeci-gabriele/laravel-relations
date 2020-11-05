@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Author;
+use Illuminate\Support\Facades\Auth;
 
 class AuthorController extends Controller
 {
@@ -15,6 +16,7 @@ class AuthorController extends Controller
     public function index()
     {
         $authors = Author::all();
+
         return view("authors.index", compact("authors"));
     }
 
@@ -39,20 +41,20 @@ class AuthorController extends Controller
         $data = $request->all();
 
         // validazione
+
         $request->validate([
             "name" => "required|max:20",
-            "lastname" => "require|max30",
-            "date_of_birth" => "required|date"
+            "lastname" => "required|max:30",
+            "date_of_birth" => "required|date_format:Y-m-d",
         ]);
 
-        $newAtuthor = new Author;
-        $newAtuthor->name = $data["name"];
-        $newAtuthor->lastname = $data["lastname"];
-        $newAtuthor->date_of_birth = $data["date_of_birth"];
-        $newAtuthor->save();
+        $newAuthor = new Author;
+        $newAuthor->name = $data["name"];
+        $newAuthor->lastname = $data["lastname"];
+        $newAuthor->date_of_birth = $data["date_of_birth"];
+        $newAuthor->save();
 
-        // rinvio alla pagina index per la visualizzazione
-        return  redirect()->route("authors.index");
+        return redirect()->route("authors.index");
     }
 
     /**
@@ -96,14 +98,13 @@ class AuthorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   
-        // cerchiamo l'autore
+    {
         $author = Author::find($id);
 
-        // cancelliamo l'autore selezionato
         $author->delete();
-        
-        // ricarico la pagina con i dati aggiornati
+
+        session()->flash("deleted", "L'utente: $author->name è stato cancellato!");
+
         return redirect()->route("authors.index");
     }
 }
